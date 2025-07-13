@@ -1,8 +1,9 @@
 
 package piezas;
 
-import tablero.Casilla;
-import source.Echo;
+import java.util.ArrayList;
+import tablero.*;
+
 
 public class Pieza {
     
@@ -11,11 +12,13 @@ public class Pieza {
     protected Casilla casilla;
     private final boolean can_capture = true;
     private char imagen;
+    private char sigla = ' ';
     
-    public Pieza(boolean color, Casilla posicion, char imagen){
+    protected Pieza(boolean color, Casilla posicion, char imagen, char nombre){
         this.color = color;
         this.casilla = posicion;
         this.imagen = imagen;
+        this.sigla = nombre;
         this.casilla.ocupar(this);
     }
     
@@ -23,8 +26,7 @@ public class Pieza {
         return this.can_capture;
     }
     
-    public void mover_pieza(Casilla casilla) throws java.lang.Exception{
-        System.out.println(casilla == this.casilla);
+    public String mover_pieza(Casilla casilla) throws java.lang.Exception{
         if (casilla.equals(this.casilla)) throw new IllegalArgumentException(
                 "La pieza no se puede mover al mismo sitio");
         
@@ -32,20 +34,10 @@ public class Pieza {
                 "La pieza no está en juego");
         
         if (!casilla.get_ocupado()){
-            if (Echo.echo()){
-                System.out.print("Se movio la pieza de ");
-                System.out.print(String.valueOf(this.get_posicion()[0])+ " "+
-                        String.valueOf(this.get_posicion()[1]));
-                System.out.print(" a ");
-                System.out.println(String.valueOf(casilla.get_coordenada()[0])+ 
-                        " "+
-                String.valueOf(casilla.get_coordenada()[1]));
-            }
             this.casilla.desocupar();
             this.casilla = casilla;
             casilla.ocupar(this);
-            
-            return;
+            return String.valueOf(this.sigla)+casilla.get_nombre_coordenada();
         }
         
         if (casilla.get_pieza().get_color() == this.color) 
@@ -56,18 +48,15 @@ public class Pieza {
                     casilla.get_pieza().getClass().getSimpleName();
             throw new Exception(message);
         }
-        
         this.casilla.desocupar();
         casilla.get_pieza().capturar();
-        if (Echo.echo()){
-                System.out.print("Se capturo la pieza de ");
-                System.out.println(String.valueOf(casilla.get_coordenada()[0])
-                +" "+
-                String.valueOf(casilla.get_coordenada()[1]));
-            }
         this.casilla = casilla;
         casilla.ocupar(this);
-        
+        return String.valueOf(this.sigla)+"x"+casilla.get_nombre_coordenada();
+    }
+    
+    public char get_name(){
+        return this.sigla;
     }
     
     public int[][] get_movimientos() throws Exception{
@@ -80,6 +69,39 @@ public class Pieza {
     
     public boolean get_color(){
         return this.color;
+    }
+    
+    protected ArrayList<ArrayList<Integer>> save_move(
+            ArrayList<ArrayList<Integer>> movimientos,
+            int[] movimiento){
+        ArrayList<Integer> movimiento_ = new ArrayList<>();
+        movimiento_.add(movimiento[0]);
+        movimiento_.add(movimiento[1]);
+        movimientos.add(movimiento_);
+        return movimientos;
+    }
+    
+    protected int[][] convert_arraylist_to_int(ArrayList<ArrayList<Integer>> 
+            mov){
+        int[][] lista_int = new int[mov.size()][2];
+        for (int i=0; i<mov.size(); i++){
+            lista_int[i][0] = mov.get(i).get(0);
+            lista_int[i][1] = mov.get(i).get(1);
+        }
+        return lista_int;
+    }
+    
+    protected boolean can_move_to(int[] coordenada){
+        Casilla casilla_analizada = null;
+        try{
+            casilla_analizada = Tablero.get_tablero().
+                    get_casilla(coordenada[0], coordenada[1]);
+        } catch (Exception e){
+            return false;
+        }
+        if (!casilla_analizada.get_ocupado()) return true;
+        
+        return casilla_analizada.get_pieza().get_color() != this.color;
     }
     
     public String get_color_name(){
