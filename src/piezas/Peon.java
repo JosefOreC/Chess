@@ -4,7 +4,7 @@ package piezas;
 import tablero.*;
 import java.util.ArrayList;
 
-public class Peon extends Pieza{
+public class Peon extends Pieza implements Movimiento{
     
     
     
@@ -13,7 +13,8 @@ public class Peon extends Pieza{
     }
     
     public void coronar(){
-        
+        this.estado = false;
+        this.casilla.desocupar();
     }
     
     @Override
@@ -37,7 +38,7 @@ public class Peon extends Pieza{
         
         if (super.can_move_to(movimiento) && !Tablero.get_tablero().
                 get_casilla(movimiento[0], movimiento[1]).get_ocupado()){
-            movimientos = super.save_move(movimientos, movimiento);
+            movimientos = save_move(movimientos, movimiento);
         }
         
         movimiento[0] = super.get_posicion()[0]+1;
@@ -53,19 +54,43 @@ public class Peon extends Pieza{
         
         if (super.can_move_to(movimiento) && Tablero.get_tablero().
                 get_casilla(movimiento[0], movimiento[1]).get_ocupado()){
-            movimientos = super.save_move(movimientos, movimiento);
+            movimientos = save_move(movimientos, movimiento);
         }
         
-        if (!is_initial_pos) return super.convert_arraylist_to_int(movimientos);
+        if (!is_initial_pos) return convert_arraylist_to_int(movimientos);
         
         movimiento[0] = super.get_posicion()[0];
         movimiento[1] = super.get_posicion()[1]+2*cambio_y;
         
         if (super.can_move_to(movimiento) && !Tablero.get_tablero().
                 get_casilla(movimiento[0], movimiento[1]).get_ocupado()){
-            movimientos = super.save_move(movimientos, movimiento);
+            movimientos = save_move(movimientos, movimiento);
         }
-        return super.convert_arraylist_to_int(movimientos);
+        return convert_arraylist_to_int(movimientos);
     }
     
+    @Override
+    public String mover_pieza(Casilla casilla) throws Exception{
+        if (casilla.get_coordenada()[1] == 7 || casilla.get_coordenada()[1]==0){
+            throw new IllegalArgumentException("El peon va a cooronar, "
+                    + "debe seleccionar una pieza de coronación.");
+        }
+        return super.mover_pieza(casilla);
+    }
+    
+    public Object mover_pieza(Casilla casilla, char pieza) throws Exception{
+        Pieza pieza_c;
+        switch(pieza){
+            case 'C':
+                break;
+            case 'D':
+                break;
+            case 'A':
+                break;
+            case 'T':
+                break;
+        }
+        this.coronar();
+        return super.mover_pieza(casilla) + "=" + pieza;
+    }
 }

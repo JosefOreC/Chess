@@ -10,7 +10,7 @@ public class Pieza {
     private final boolean color;
     protected boolean estado = true;
     protected Casilla casilla;
-    private final boolean can_capture = true;
+    private boolean can_capture = true;
     private char imagen;
     private char sigla = ' ';
     
@@ -24,6 +24,10 @@ public class Pieza {
     
     public boolean can_capture(){
         return this.can_capture;
+    }
+    
+    protected void set_can_capture(boolean can){
+        this.can_capture = can;
     }
     
     public String mover_pieza(Casilla casilla) throws java.lang.Exception{
@@ -71,25 +75,7 @@ public class Pieza {
         return this.color;
     }
     
-    protected ArrayList<ArrayList<Integer>> save_move(
-            ArrayList<ArrayList<Integer>> movimientos,
-            int[] movimiento){
-        ArrayList<Integer> movimiento_ = new ArrayList<>();
-        movimiento_.add(movimiento[0]);
-        movimiento_.add(movimiento[1]);
-        movimientos.add(movimiento_);
-        return movimientos;
-    }
     
-    protected int[][] convert_arraylist_to_int(ArrayList<ArrayList<Integer>> 
-            mov){
-        int[][] lista_int = new int[mov.size()][2];
-        for (int i=0; i<mov.size(); i++){
-            lista_int[i][0] = mov.get(i).get(0);
-            lista_int[i][1] = mov.get(i).get(1);
-        }
-        return lista_int;
-    }
     
     protected boolean can_move_to(int[] coordenada){
         Casilla casilla_analizada = null;

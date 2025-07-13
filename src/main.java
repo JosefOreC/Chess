@@ -18,29 +18,32 @@ public class main {
     
     public static void main(String[] args) throws Exception{
         
-        Peon peon1 = new Peon(false, Tablero.get_tablero().get_casilla(4, 1),
-                            'n');
+        Torre peon1 = new Torre(false, Tablero.get_tablero().get_casilla(5, 5),
+                            'T');
         
-        Peon peon2 = new Peon(false, Tablero.get_tablero().get_casilla(7, 1),
-                            'm');
+        Peon peon2 = new Peon(false, Tablero.get_tablero().get_casilla(5, 4),
+                        'P');
+        Peon peon3 = new Peon(false, Tablero.get_tablero().get_casilla(5, 6),
+                        'P');
+        Peon peon4 = new Peon(false, Tablero.get_tablero().get_casilla(4, 5),
+                        'P');
         
-        Peon peon3 = new Peon(true, Tablero.get_tablero().get_casilla(5, 2),
-                            'o');
+        Peon peon5 = new Peon(false, Tablero.get_tablero().get_casilla(6, 5),
+                        'P');
+        
+        Peon peon6 = new Peon(false, Tablero.get_tablero().get_casilla(4, 4),
+                        'P');
+        Peon peon7 = new Peon(false, Tablero.get_tablero().get_casilla(4, 6),
+                        'P');
         
         Tablero.get_tablero().print_tablero();
         
         System.out.println("Movimientos de 1:");
         print_movs(peon1);
-        System.out.println("Movimientos de 2:");
-        print_movs(peon2);
-        System.out.println("Movimientos de 3:");
-        print_movs(peon3);
         
-        System.out.println(peon1.mover_pieza(Tablero.get_tablero().get_casilla(4, 3)));
         
-        Tablero.get_tablero().print_tablero(); 
     }
-    public static void print_movs(Peon peon){
+    public static void print_movs(Pieza peon){
         char[] x = {'a','b','c','d','e','f','g','h'};
         try {
             int[][] mov = peon.get_movimientos();
