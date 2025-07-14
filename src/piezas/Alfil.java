@@ -28,4 +28,9 @@ public class Alfil extends Pieza implements Movimiento{
         return movimientos_diagonales(this.get_posicion());
     }
     
+    @Override
+    public int[][] get_movimientos_all(){
+        return movimientos_diagonales_all(this.get_posicion());
+    }
+    
 }

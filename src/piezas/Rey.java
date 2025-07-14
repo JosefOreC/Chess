@@ -29,7 +29,7 @@ public class Rey extends Pieza implements Movimiento{
     }
     
     @Override
-    public int[][] get_movimientos(){
+    public int[][] get_movimientos() throws Exception{
        int x = super.get_posicion()[0]-1;
        boolean[] is_valid_move;
        ArrayList<ArrayList<Integer>> movimientos = new ArrayList<>();
@@ -41,7 +41,34 @@ public class Rey extends Pieza implements Movimiento{
                if (x==y) continue;
                is_valid_move = is_valid_move(x, y, super.get_posicion());
                if (!is_valid_move[0]) continue;
-               //Logica para detectar si la casilla de x,y está amenzada
+               this.casilla.desocupar();
+               if (is_casilla_amenazada(x, y, this.get_color())){
+                   this.casilla.ocupar(this);
+                   continue;
+               } 
+                   
+               this.casilla.ocupar(this);
+               movimientos = save_move(movimientos, x,y);
+           }
+       }
+       
+       return convert_arraylist_to_int(movimientos);
+    }
+    
+    @Override
+    public int[][] get_movimientos_all() throws Exception{
+       int x = super.get_posicion()[0]-1;
+       boolean[] is_valid_move;
+       ArrayList<ArrayList<Integer>> movimientos = new ArrayList<>();
+       
+       for (; x<=super.get_posicion()[0]+1; x++){
+           int y = super.get_posicion()[1]-1;
+           
+           for (; y<=super.get_posicion()[1]+1; y++){
+               if (x==y) continue;
+               is_valid_move = is_valid_move(x, y);
+               if (!is_valid_move[0]) continue;
+               movimientos = save_move(movimientos, x,y);
            }
        }
        

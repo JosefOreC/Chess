@@ -17,12 +17,14 @@ public class Casilla {
     public Casilla(int[] coordenada, boolean color){
         this.color = color;
         this.coordenada = coordenada;
+        this.ocupado = false;
     }
     
     public Casilla(int[] coordenada, boolean color, Pieza pieza){
         this.color = color;
         this.coordenada = coordenada;
         this.pieza = pieza;
+        this.ocupado = true;
     }
     
     public boolean get_ocupado(){

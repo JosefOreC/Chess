@@ -26,4 +26,9 @@ public class Torre extends Pieza implements Movimiento{
         return movimientos_rectos(this.get_posicion());
     }
     
+    @Override
+    public int[][] get_movimientos_all(){
+        return movimientos_rectos_all(this.get_posicion());
+    }
+    
 }

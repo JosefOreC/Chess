@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import tablero.*;
 
 
-public class Pieza {
+public class Pieza{
     
     private final boolean color;
     protected boolean estado = true;
@@ -96,12 +96,22 @@ public class Pieza {
         return "Blanco";
     }
     
+    
+    public int[][] get_movimientos_all() throws Exception{
+        throw new Exception("Pieza fuera de juego");
+    }
+    
+    public int[][] get_capture_move(){
+        return null;
+    }
+    
     public boolean get_estado(){
         return this.estado;
     }
     
     public void capturar(){
         this.estado = false;
+        this.casilla.desocupar();
         this.casilla = null;
     }
     
