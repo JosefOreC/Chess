@@ -10,7 +10,9 @@ public class Casilla {
     private boolean color;
     private boolean ocupado;
     private Pieza pieza = null;
-    private char[] corX = {'a','b','c','d','e','f','g','h'};
+    public static char[] corX = {'a','b','c','d','e','f','g','h','i','j','k',
+                            'l' ,'m','n','p','1','r','s','t','u','v','w','x',
+                            'y','z'};
     
     public Casilla(int[] coordenada, boolean color){
         this.color = color;

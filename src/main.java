@@ -18,38 +18,25 @@ public class main {
     
     public static void main(String[] args) throws Exception{
         
-        Torre peon1 = new Torre(false, Tablero.get_tablero().get_casilla(5, 5),
-                            'T');
+        Caballo peon1 = new Caballo(true, Tablero.get_tablero()
+                .get_casilla(5, 5));
         
-        Peon peon2 = new Peon(false, Tablero.get_tablero().get_casilla(5, 4),
-                        'P');
-        Peon peon3 = new Peon(false, Tablero.get_tablero().get_casilla(5, 6),
-                        'P');
-        Peon peon4 = new Peon(false, Tablero.get_tablero().get_casilla(4, 5),
-                        'P');
-        
-        Peon peon5 = new Peon(false, Tablero.get_tablero().get_casilla(6, 5),
-                        'P');
-        
-        Peon peon6 = new Peon(false, Tablero.get_tablero().get_casilla(4, 4),
-                        'P');
-        Peon peon7 = new Peon(false, Tablero.get_tablero().get_casilla(4, 6),
-                        'P');
+        Peon peon2 = new Peon(false, Tablero.get_tablero().get_casilla(4, 3));
+        System.out.println(peon2.mover_pieza(Tablero.get_tablero().get_casilla(0, 7), 'A'));
         
         Tablero.get_tablero().print_tablero();
         
         System.out.println("Movimientos de 1:");
-        print_movs(peon1);
+        print_movs(peon2);
         
         
     }
     public static void print_movs(Pieza peon){
-        char[] x = {'a','b','c','d','e','f','g','h'};
         try {
             int[][] mov = peon.get_movimientos();
             for (int[] mov1 : mov) {
-                System.out.println("\t" + String.valueOf(x[mov1[0]]) + 
-                        String.valueOf(mov1[1] + 1));
+                System.out.println("\t" + String.valueOf(Casilla.corX[mov1[0]]) 
+                        + String.valueOf(mov1[1] + 1));
             }
             
         } catch (Exception ex) {

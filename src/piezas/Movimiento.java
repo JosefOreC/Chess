@@ -74,8 +74,10 @@ public interface Movimiento{
         boolean[] result = new boolean[2];
         boolean is_in_range, is_limit_piece, is_capturable_piece;
         
-        is_in_range = mov_x >= 0 && mov_x <=7 &&
-                              mov_y >= 0 && mov_y <=7;
+        is_in_range = mov_x >= 0 && 
+                mov_x <Tablero.get_tablero().get_dimension_x() &&
+                              mov_y >= 0 && 
+                mov_y < Tablero.get_tablero().get_dimension_y();
 
         if (!is_in_range){
             result[0] = false;
@@ -115,7 +117,7 @@ public interface Movimiento{
         for (int i = 0; i < 2; i++) {
             int cx = (i == 0) ? 1 : -1;
             for (int mov_x = coordenada_inicial[0] + cx;
-                 mov_x >= 0 && mov_x <= 7;
+                 mov_x >= 0 && mov_x < Tablero.get_tablero().get_dimension_x();
                  mov_x += cx) {
 
                 is_valid_move = is_valid_move(mov_x, coordenada_inicial[1], 
@@ -135,7 +137,7 @@ public interface Movimiento{
         for (int i = 0; i < 2; i++) {
             int cy = (i == 0) ? 1 : -1;
             for (int mov_y = coordenada_inicial[1] + cy;
-                 mov_y >= 0 && mov_y <= 7;
+                 mov_y >= 0 && mov_y < Tablero.get_tablero().get_dimension_y();
                  mov_y += cy) {
 
                 is_valid_move = is_valid_move(coordenada_inicial[0], mov_y, coordenada_inicial);

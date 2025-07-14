@@ -5,14 +5,21 @@
 package piezas;
 
 import tablero.Casilla;
-
+import source.Image;
 /**
  *
  * @author danie
  */
 public class Alfil extends Pieza implements Movimiento{
     
-    public Alfil(boolean color, Casilla posicion, char imagen) {
+    public Alfil(boolean color, Casilla posicion, String imagen) {
+        super(color, posicion, imagen, 'A');
+    }
+    
+    public Alfil(boolean color, Casilla posicion) {
+        String imagen;
+        if (!color) imagen = Image.image_alfil_B;
+        else imagen = Image.image_alfil_N;
         super(color, posicion, imagen, 'A');
     }
     

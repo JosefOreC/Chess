@@ -4,12 +4,20 @@
  */
 package piezas;
 
+import source.Image;
 import tablero.Casilla;
 
 
 public class Torre extends Pieza implements Movimiento{
     
-    public Torre(boolean color, Casilla posicion, char imagen) {
+    public Torre(boolean color, Casilla posicion, String imagen) {
+        super(color, posicion, imagen, 'T');
+    }
+    
+    public Torre(boolean color, Casilla posicion) {
+        String imagen;
+        if (!color) imagen = Image.image_torre_B;
+        else imagen = Image.image_torre_N;
         super(color, posicion, imagen, 'T');
     }
     

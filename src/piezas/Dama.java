@@ -1,11 +1,19 @@
 
 package piezas;
 
+import source.Image;
 import tablero.Casilla;
 
 public class Dama extends Pieza implements Movimiento{
     
-    public Dama(boolean color, Casilla posicion, char imagen) {
+    public Dama(boolean color, Casilla posicion, String imagen) {
+        super(color, posicion, imagen, 'D');
+    }
+    
+    public Dama(boolean color, Casilla posicion) {
+        String imagen;
+        if (!color) imagen = Image.image_dama_B;
+        else imagen = Image.image_dama_N;
         super(color, posicion, imagen, 'D');
     }
     

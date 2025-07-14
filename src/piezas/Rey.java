@@ -5,6 +5,7 @@
 package piezas;
 
 import java.util.ArrayList;
+import source.Image;
 import tablero.Casilla;
 
 /**
@@ -15,9 +16,16 @@ public class Rey extends Pieza implements Movimiento{
     
     private boolean is_in_check = false;
     
-    public Rey(boolean color, Casilla posicion, char imagen) {
+    public Rey(boolean color, Casilla posicion, String imagen) {
         super(color, posicion, imagen, 'R');
         super.set_can_capture(false);
+    }
+    
+    public Rey(boolean color, Casilla posicion) {
+        String imagen;
+        if (!color) imagen = Image.image_rey_B;
+        else imagen = Image.image_rey_N;
+        super(color, posicion, imagen, 'R');
     }
     
     @Override
@@ -38,6 +46,11 @@ public class Rey extends Pieza implements Movimiento{
        }
        
        return convert_arraylist_to_int(movimientos);
-       
+    } 
+    
+    @Override
+    public String mover_pieza(Casilla casilla) throws Exception{
+        this.is_in_check = false;
+        return super.mover_pieza(casilla);
     }
 }

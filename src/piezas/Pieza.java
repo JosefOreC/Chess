@@ -11,10 +11,11 @@ public class Pieza {
     protected boolean estado = true;
     protected Casilla casilla;
     private boolean can_capture = true;
-    private char imagen;
+    private String imagen;
     private char sigla = ' ';
     
-    protected Pieza(boolean color, Casilla posicion, char imagen, char nombre){
+    protected Pieza(boolean color, Casilla posicion, String imagen, 
+            char nombre){
         this.color = color;
         this.casilla = posicion;
         this.imagen = imagen;
@@ -104,7 +105,7 @@ public class Pieza {
         this.casilla = null;
     }
     
-    public char get_image(){
+    public String get_image(){
         return this.imagen;
     }
     

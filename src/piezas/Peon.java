@@ -2,19 +2,42 @@
 package piezas;
 
 import tablero.*;
+import source.Image;
 import java.util.ArrayList;
 
 public class Peon extends Pieza implements Movimiento{
     
     
     
-    public Peon(boolean color, Casilla posicion, char imagen) {
+    public Peon(boolean color, Casilla posicion, String imagen) {
         super(color, posicion, imagen, ' ');
     }
     
-    public void coronar(){
+    public Peon(boolean color, Casilla posicion) {
+        String imagen;
+        if (!color) imagen = Image.image_peon_B;
+        else imagen = Image.image_peon_N;
+        super(color, posicion, imagen, ' ');
+    }
+    
+    public void coronar(char pieza) throws Exception{
+        Pieza pieza_c;
+        switch(pieza){
+            case 'C':
+                pieza_c = new Caballo(this.get_color(), this.get_casilla());
+                break;
+            case 'D':
+                pieza_c = new Dama(this.get_color(), this.get_casilla());
+                break;
+            case 'A':
+                pieza_c = new Alfil(this.get_color(), this.get_casilla());
+                break;
+            case 'T':
+                pieza_c = new Torre(this.get_color(), this.get_casilla());
+                break;
+        }
         this.estado = false;
-        this.casilla.desocupar();
+        
     }
     
     @Override
@@ -78,19 +101,10 @@ public class Peon extends Pieza implements Movimiento{
         return super.mover_pieza(casilla);
     }
     
-    public Object mover_pieza(Casilla casilla, char pieza) throws Exception{
-        Pieza pieza_c;
-        switch(pieza){
-            case 'C':
-                break;
-            case 'D':
-                break;
-            case 'A':
-                break;
-            case 'T':
-                break;
-        }
-        this.coronar();
-        return super.mover_pieza(casilla) + "=" + pieza;
+    public String mover_pieza(Casilla casilla, char pieza) throws Exception{
+        
+        String move = super.mover_pieza(casilla) + "=" + pieza; 
+        this.coronar(pieza);
+        return move;
     }
 }

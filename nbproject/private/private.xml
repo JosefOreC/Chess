@@ -9,6 +9,13 @@
             <file>file:/D:/Java/chess/JavaApplication2/src/main.java</file>
             <file>file:/D:/Java/chess/JavaApplication2/src/source/Echo.java</file>
             <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Peon.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Dama.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Alfil.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Torre.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Rey.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Movimiento.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/piezas/Caballo.java</file>
+            <file>file:/D:/Java/chess/JavaApplication2/src/source/Image.java</file>
         </group>
     </open-files>
 </project-private>
