@@ -14,6 +14,13 @@ public class Casilla {
                             'l' ,'m','n','p','1','r','s','t','u','v','w','x',
                             'y','z'};
     
+    public static int get_num_index(char letra){
+        for(int i=0; i<corX.length; i++){
+            if (corX[i]==letra) return i;
+        }
+        return -1;
+    }
+    
     public Casilla(int[] coordenada, boolean color){
         this.color = color;
         this.coordenada = coordenada;

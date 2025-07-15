@@ -4,6 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import tablero.*;
 import piezas.*;
+import juego.*;
+
 import javax.script.*;
 import jdk.jshell.JShell;
 import jdk.jshell.SnippetEvent;
@@ -18,25 +20,20 @@ public class main {
     
     public static void main(String[] args) throws Exception{
         
-              
-        Caballo peon1 = new Caballo(true, Tablero.get_tablero()
-                .get_casilla(3, 2));
-        
-        Caballo peon4 = new Caballo(false, Tablero.get_tablero()
-                .get_casilla(1, 0));
-        
-        Peon peon5 = new Peon(false, Tablero.get_tablero()
-                .get_casilla(6, 1));
-        
-        Rey peon2 = new Rey(true, Tablero.get_tablero().get_casilla(6, 2));
+        Game g = new Game();
         
         Tablero.get_tablero().print_tablero();
-        
-        System.out.println("Movimientos de 1:");
-        print_movs(peon2);
-        System.out.println("Movimientos de 2:");
-        print_movs(peon5);
-        
+        Scanner len = new Scanner(System.in);
+        String lec;
+        while (true) {
+            System.out.print("Seleccione la pieza: ");
+            lec = len.nextLine();
+            g.select_pieza(lec);
+            System.out.print("Seleccione el movimiento: ");
+            lec = len.nextLine();
+            System.out.println(g.do_move(g.get_pieza_en_juego().get_name()+lec));
+            Tablero.get_tablero().print_tablero();
+        }
         
     }
     public static void print_movs(Pieza peon){
